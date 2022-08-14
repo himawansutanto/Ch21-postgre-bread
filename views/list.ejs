@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ch21-postgre-bread</title>
+    <script src="https://kit.fontawesome.com/028160cc98.js" crossorigin="anonymous"></script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .p1 {
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .p2 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .p3 {
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=datetime],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 5%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        input[type=button] {
+            width: 5%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            border: auto;
+            padding: auto;
+            width: auto;
+            resize: vertical;
+            overflow: auto;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: white;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .pagination a:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .pagination a:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .btn-float-left {
+            float: left;
+        }
+
+        .btn-float-right {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 class="p2">BREAD (Browse, Read, Edit, Add, Delete)</h1>
+        <h1 class="p2">Filters </h1>
+        <form action="" method="get">
+            <input type="hidden" name="page" value="1">
+            <table width="50%">
+                <tr>
+                </tr>
+                <td> ID</td>
+                <td><input type="number" id="id" name="id" placeholder="ID" style="width: 100%"></td>
+                <tr>
+                </tr>
+                <td>String</td>
+                <td><input type="text" id="string" name="string" placeholder="String" style="width: 100%"></td>
+                <tr>
+                </tr>
+                <td> Integer</td>
+                <td><input type="number" id="integer" name="integer" placeholder="Integer" style="width: 100%"></td>
+                <tr>
+                </tr>
+                <td>Float</td>
+                <td><input type="number" step="any" id="float" name="float" placeholder="Float" style="width: 100%">
+                </td>
+                <tr>
+                </tr>
+                <td>Date</td>
+                <td><input type="date" id="date" name="date" placeholder="Date" style="width: 100%"></td>
+                <tr>
+                </tr>
+                <td> Boolean</td>
+                <td>
+                    <select name="boolean" id="boolean" style="width: 100%">
+                        <option value="">Choose the boolean...</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </td>
+                <tr>
+                </tr>
+
+        </form>
+        </table>
+        <td><input type="submit" id="search" name="search" value="Search" style="background-color: blue"></td>
+        <td><input type="button" onclick="location.href='/';" value="Reset" class="btn-float-right"
+                style="background-color: blue"></td>
+
+        <br>
+        <table style="width: 100%" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>String</th>
+                    <th>Integer</th>
+                    <th>Float</th>
+                    <th>Date</th>
+                    <th>Boolean</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach((item)=> { %>
+                    <tr>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.string %>
+                        </td>
+                        <td>
+                            <%= item.integer %>
+                        </td>
+                        <td>
+                            <%= item.float %>
+                        </td>
+                        <td>
+                            <%= item.date %>
+                        </td>
+                        <td>
+                            <%= item.boolean %>
+                        </td>
+
+                        <td>
+                            <button type="button" onclick="location.href='edit/<%= item.id %>';"><i class="fas fa-edit"
+                                    style="font-size: 20px"></i> Edit</button>
+                            <button type="button" onclick="location.href='delete/<%= item.id %>';"><i
+                                    class="fa-solid fa-trash-can" style="font-size: 20px"></i> Delete</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <br>
+        <nav aria-label="Page navigation example">
+            <div class="pagination">
+                <% for(let i=1; i <=pages; i++){ %>
+                    <thead class="page-item<%= page == i ? ' active' : '' %>"><a class="page-link"
+                            href="<%= url.replace(`page=${page}` ,`page=${i}`) %>" style="background-color: blue">
+                            <%= i %>
+                        </a>
+                    </thead>
+                    <% } %>
+            </div>
+        </nav>
+        <input type="button" onclick="location.href='/add';" value=" Add" class="button"
+            style="background-color: blue" />
+    </div>
+</body>
+
+</html>
