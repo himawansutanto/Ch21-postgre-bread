@@ -7,7 +7,7 @@ module.exports = function (pool) {
   router.get('/', function (req, res, next) {
     const url = req.url == '/' ? '/?page=1' : req.url
     const page = req.query.page || 1
-    const limit = 2
+    const limit = 4
     const offset = (page - 1) * limit
     const wheres = []
     const values = []
