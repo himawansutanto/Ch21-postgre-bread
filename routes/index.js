@@ -12,6 +12,8 @@ module.exports = function (pool) {
     const wheres = []
     const values = []
     let count = 1
+    const sortBy = req.query.sortBy || 'id'
+    const sortMode = req.query.sortMode || 'asc'
 
     if (req.query.id) {
       wheres.push(`id = $${count}`)
@@ -61,6 +63,10 @@ module.exports = function (pool) {
       if (wheres.length > 0) {
         sql += `WHERE ${wheres.join(' and ')}`
       }
+
+      // sorting
+      sql += ` ORDER BY ${sortBy} ${sortMode}`
+
       sql += ` LIMIT  $${count} OFFSET  $${count + 1}`
 
 
