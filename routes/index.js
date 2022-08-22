@@ -5,15 +5,16 @@ module.exports = function (pool) {
 
   /* GET home page. */
   router.get('/', function (req, res, next) {
-    const url = req.url == '/' ? '/?page=1' : req.url
+    const sortBy = req.query.sortBy || 'id'
+    const sortMode = req.query.sortMode || 'asc'
+
+    const url = req.url == '/' ? '/?page=1&sortBy=id&sortMode=asc' : req.url
     const page = req.query.page || 1
     const limit = 4
     const offset = (page - 1) * limit
     const wheres = []
     const values = []
     let count = 1
-    const sortBy = req.query.sortBy || 'id'
-    const sortMode = req.query.sortMode || 'asc'
 
     if (req.query.id) {
       wheres.push(`id = $${count}`)
@@ -75,7 +76,7 @@ module.exports = function (pool) {
         if (err) {
           console.log(err.stack)
         } else {
-          res.render('list', { title: 'Express', rows: rows.rows, pages, page, moment, url });
+          res.render('list', { title: 'Express', rows: rows.rows, pages, page, moment, url, query: req.query });
           console.log(rows.rows[0])
         }
       })
