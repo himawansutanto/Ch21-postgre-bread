@@ -285,15 +285,19 @@
         </table>
         <br>
         <nav aria-label="Page navigation example">
-            <div class="pagination">
-                <% for(let i=1; i <=pages; i++){ %>
-                    <thead class="page-item<%= page == i ? ' active' : '' %>"><a class="page-link"
-                            href="<%= url.replace(`page=${page}` ,`page=${i}`) %>" style="background-color: blue">
+            <ul class="pagination">
+                <li class="page-item <%= page == 1 ? 'disabled' : ''; %>"><a class="page-link" href="/?page=<%=
+              parseInt(page)-1%>">&laquo;</a></li>
+                <% for (let i=1; i<=pages; i++) { %>
+                    <li class="page-item <%= page == i ? 'active' : ''; %>"><a class="page-link" href="/?page=<%= i
+              %>">
                             <%= i %>
-                        </a>
-                    </thead>
-                    <% } %>
-            </div>
+                        </a></li>
+                    <% }; %>
+                        <li class="page-item <%= page == pages ? 'disabled' : ''; %>"><a class="page-link"
+                                href="/?page=<%= parseInt(page) + 1%>">&raquo;</a></li>
+
+            </ul>
         </nav>
         <input type="button" onclick="location.href='/add';" value=" Add" class="button"
             style="background-color: blue" />
