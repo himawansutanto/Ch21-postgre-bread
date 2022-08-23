@@ -289,7 +289,8 @@
                 <thead class="page-item <%= page == 1 ? 'disabled' : ''; %>"><a class="page-link"
                         style="background-color: blue" href="/?page=<%= parseInt(page)-1%>">&laquo;</a></thead>
                 <% for (let i=1; i<=pages; i++) { %>
-                    <thead class="page-item <%= page == i ? 'active' : ''; %>"><a class="page-link" href="/?page=<%= i %>" style="background-color: blue">
+                    <thead class="page-item <%= page == i ? 'active' : ''; %>"><a class="page-link"
+                            href="/?page=<%= i %>" style="background-color: blue">
                             <%= i %>
                         </a></thead>
                     <% }; %>

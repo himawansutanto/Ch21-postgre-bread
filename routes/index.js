@@ -73,10 +73,8 @@ module.exports = function (pool) {
       // callback
       pool.query(sql, [...values, limit, offset], (err, rows) => {
         if (err) {
-          console.log(err.stack)
         } else {
           res.render('list', { title: 'Express', rows: rows.rows, pages, page, moment, url, query: req.query });
-          console.log(rows.rows[0])
         }
       })
     })
