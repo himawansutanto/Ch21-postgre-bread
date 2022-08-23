@@ -10,7 +10,7 @@ module.exports = function (pool) {
 
     const url = req.url == '/' ? '/?page=1&sortBy=id&sortMode=asc' : req.url
     const page = req.query.page || 1
-    const limit = 4
+    const limit = 3
     const offset = (page - 1) * limit
     const wheres = []
     const values = []
@@ -58,7 +58,7 @@ module.exports = function (pool) {
     }
 
     pool.query(sql, values, (err, rows) => {
-      const pages = Math.ceil(parseInt(rows.rows[0].TOTAL) / limit)
+      const pages = Math.ceil(parseInt(rows.rows[0].total) / limit)
 
       sql = 'SELECT * FROM bread '
       if (wheres.length > 0) {
@@ -69,7 +69,6 @@ module.exports = function (pool) {
       sql += ` ORDER BY ${sortBy} ${sortMode}`
 
       sql += ` LIMIT  $${count} OFFSET  $${count + 1}`
-
 
       // callback
       pool.query(sql, [...values, limit, offset], (err, rows) => {

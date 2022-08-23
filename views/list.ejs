@@ -285,19 +285,20 @@
         </table>
         <br>
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item <%= page == 1 ? 'disabled' : ''; %>"><a class="page-link" href="/?page=<%=
-              parseInt(page)-1%>">&laquo;</a></li>
+            <div class="pagination">
+                <thead class="page-item <%= page == 1 ? 'disabled' : ''; %>"><a class="page-link"
+                        style="background-color: blue" href="/?page=<%=
+              parseInt(page)-1%>">&laquo;</a></thead>
                 <% for (let i=1; i<=pages; i++) { %>
-                    <li class="page-item <%= page == i ? 'active' : ''; %>"><a class="page-link" href="/?page=<%= i
-              %>">
+                    <thead class="page-item <%= page == i ? 'active' : ''; %>"><a class="page-link" href="/?page=<%= i
+              %>" style="background-color: blue">
                             <%= i %>
-                        </a></li>
+                        </a></thead>
                     <% }; %>
-                        <li class="page-item <%= page == pages ? 'disabled' : ''; %>"><a class="page-link"
-                                href="/?page=<%= parseInt(page) + 1%>">&raquo;</a></li>
-
-            </ul>
+                        <thead class="page-item <%= page == pages ? 'disabled' : ''; %>"><a class="page-link"
+                                href="/?page=<%= parseInt(page) + 1%>" style="background-color: blue">&raquo;</a>
+                        </thead>
+            </div>
         </nav>
         <input type="button" onclick="location.href='/add';" value=" Add" class="button"
             style="background-color: blue" />
